@@ -1,6 +1,7 @@
 package com.eadlab.wallet_app.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,16 +28,21 @@ public class Wallet {
     private String name;
 
     @Size(min =2, max=30)
-    private String accnumber;
+    private String accountNumber;
     @Size(max=100)
     private String desp;
     @Min(1)
     @Max(3)
     private Integer priority;
-private Double curr_balance;
+private Double currentbalance;
+
+@OneToMany (cascade = CascadeType.ALL , fetch =FetchType.LAZY, mappedBy = "wallet", orphanRemoval = false)
+@JsonIgnore
+private List<Transaction> transactions;
+
 @PrePersist
     public void setbal(){
-    this.curr_balance=new Double(0);
+    this.currentbalance=new Double(0);
 }
 
 }
