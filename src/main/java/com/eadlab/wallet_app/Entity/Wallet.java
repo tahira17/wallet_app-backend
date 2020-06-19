@@ -28,9 +28,9 @@ public class Wallet {
     private String name;
 
     @Size(min =2, max=30)
-    private String accountNumber;
+    private String accountnumber;
     @Size(max=100)
-    private String desp;
+    private String description;
     @Min(1)
     @Max(3)
     private Integer priority;
